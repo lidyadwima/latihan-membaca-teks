@@ -1,0 +1,6 @@
+#id, name, quantity, price
+001, mouse, 1, 50000
+002, keyboard, 3, 100000
+003, book, 1, 5000
+004, pen, 2, 5000
+005, laptop, 3, 9000000
