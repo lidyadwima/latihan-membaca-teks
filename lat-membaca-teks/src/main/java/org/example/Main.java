@@ -5,21 +5,18 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        org.example.BacaReader reader = new org.example.BacaReader();
-        List<String> bacaData = reader.readFromFile(
-                "C:\\Users\\U S E R\\Documents\\GitHub\\latihan-membaca-teks\\lat-membaca-teks\\src\\main\\java\\baca.txt"
-        );
+        List<String> salesData = org.example.SalesReader.readFromFile("sales.txt");
 
-        org.example.TransactionProcessor processor = new org.example.TransactionProcessor();
-        List<org.example.Transaction> transactionData = processor.parseBacaData(bacaData);
+        List<org.example.Transaction> transactionData = org.example.TransactionProcessor.parseSalesData(salesData);
 
-        // Membuat objek report
-        org.example.BacaReport report = new org.example.BacaReport();
+        double total = org.example.TransactionProcessor.getTotalSales(transactionData);
 
-        // Menampilkan ke console
-        report.printReport(transactionData);
+        org.example.SalesReport.writeReport("report.txt", transactionData, total);
 
-        // Menulis ke file jika mau
-        report.writeReport("transaction-report.txt", transactionData);
+        System.out.println("Laporan berhasil dibuat, Cek report.txt");
+
+        for(String data : salesData) {
+            System.out.println(data);
+        }
     }
 }

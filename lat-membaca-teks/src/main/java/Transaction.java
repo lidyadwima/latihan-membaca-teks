@@ -1,34 +1,40 @@
 package org.example;
 
 public class Transaction {
-    private int id;
-    private String name;
-    private int quantity;
-    private double price;
+    public int id;
+    public String item;
+    public int quantity;
+    public double price;
 
-    // Constructor
-    public Transaction(int id, String name, int quantity, double price) {
+    public Transaction(int id, String item, int quantity, double price) {
         this.id = id;
-        this.name = name;
+        this.item = item;
         this.quantity = quantity;
         this.price = price;
     }
 
-    // Getter dan Setter
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getItem() {
+        return item;
+    }
 
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public double getPrice() {
+        return price;
+    }
 
-    // Method tambahan untuk menghitung total harga transaksi
     public double getTotal() {
         return quantity * price;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + item + "," + quantity + "," + price;
     }
 }

@@ -1,32 +1,36 @@
 package org.example;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionProcessor {
 
-    // Method untuk mengubah List<String> menjadi List<Transaction>
-    public List<org.example.Transaction> parseBacaData(List<String> bacaData) {
-        List<org.example.Transaction> transactions = new ArrayList<>();
+    public static List<Transaction> parseSalesData(List<String> data) {
+        List<Transaction> list = new ArrayList<>();
 
-        for (String line : bacaData) {
-            try {
-                // Misal format file: id,name,quantity,price
-                String[] parts = line.split(",");
+        for (String line : data) {
+            if (line.startsWith("#") || line.trim().isEmpty())
+                continue;
 
-                int id = Integer.parseInt(parts[0].trim());
-                String name = parts[1].trim();
-                int quantity = Integer.parseInt(parts[2].trim());
-                double price = Double.parseDouble(parts[3].trim());
+            String[] parts = line.split(",");
 
-                // Buat objek Transaction dan tambahkan ke list
-                org.example.Transaction t = new org.example.Transaction(id, name, quantity, price);
-                transactions.add(t);
-            } catch (Exception e) {
-                System.out.println("Baris tidak valid: " + line);
-            }
+            int id = Integer.parseInt(parts[0].trim());
+            String item = parts[1].trim();
+            int qty = Integer.parseInt(parts[2].trim());
+            double price = Double.parseDouble(parts[3].trim());
+
+            list.add(new Transaction(id, item, qty, price));
         }
 
-        return transactions;
+        return list;
+    }
+
+    public static double getTotalSales(List<Transaction> list) {
+        double total = 0;
+
+        for (Transaction t : list) {
+            total += t.getTotal();
+        }
+
+        return total;
     }
 }
